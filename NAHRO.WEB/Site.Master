@@ -26,18 +26,19 @@
         }
     </style>
 
-          <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-       <script  src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="  crossorigin="anonymous"></script>
-
-        <script src="js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0-rc.1/themes/smoothness/jquery-ui.css">
+  <script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+  <script src="http://code.jquery.com/ui/1.12.0-rc.1/jquery-ui.js"></script>
+    <script src="js/tether.min.js" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </head>
 <body>
-    <form runat="server">
+    <form runat="server" id="frmmain">
         <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
             <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,12 +50,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="AgencyDetails.aspx">Home <span class="sr-only">(current)</span></a>
                     </li>
-                   
+
                 </ul>
-                <form class="form-inline mt-2 mt-md-0">
-                    <input class="form-control mr-sm-2" type="text" style="width:250px;" placeholder="Search">
+                <div class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" style="width: 250px;" placeholder="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+                </div>
             </div>
         </nav>
         <div class="container-fluid">
@@ -110,7 +111,7 @@
         </div>
 
 
-  
+
     </form>
 </body>
 </html>

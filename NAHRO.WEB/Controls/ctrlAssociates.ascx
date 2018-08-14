@@ -4,8 +4,8 @@
 <div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
-            <span style="font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff; background-image: none; font-weight: bold;">Actions: </span>&nbsp;&nbsp;<input class="form-control mr-sm-2" type="text" placeholder="Export to File">
-            <button id="btnGo" class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+            <span style="font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff; background-image: none; font-weight: bold;">Actions: </span>&nbsp;&nbsp;<%--<input class="form-control mr-sm-2" type="text" placeholder="Export to File">--%>
+             <asp:Button ID="btnD" CommandName="btnD" runat="server" CausesValidation="false" class="btn btn-outline-success my-2 my-sm-0" ClientIDMode="Static" OnClick="btnD_Click" Text="Export to File" />
         </div>
     </div>
     <div class="col-sm-6 col-md-6">

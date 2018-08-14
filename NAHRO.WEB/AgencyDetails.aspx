@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgencyDetails.aspx.cs" Inherits="NAHRO.WEB.AgencyDetails" %>
-
+<%@ Register Src="~/Controls/ctrlAgencyDetails.ascx" TagPrefix="uc1" TagName="ctrlAgency" %>
 <%@ Register Src="~/Controls/ctrlEmplyees.ascx" TagPrefix="uc1" TagName="ctrlEmplyees" %>
 <%@ Register Src="~/Controls/ctrlAssociates.ascx" TagPrefix="uc1" TagName="ctrlAssociates" %>
 <%@ Register Src="~/Controls/ctrlManagers.ascx" TagPrefix="uc1" TagName="ctrlManagers" %>
@@ -7,7 +7,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <style>
+
+    <%--<style>
         @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 *,
@@ -125,41 +126,122 @@ input:checked + label {
   }
 }
 
-    </style>
-   <main class="col-sm-11 offset-sm-1 col-md-11 offset-md-1 pt-3">
-       <input id="tab1" type="radio" name="tabs" checked>
-  <label for="tab1">Company Profile</label>
-    
-  <input id="tab2" type="radio" name="tabs">
-  <label for="tab2">Employees</label>
-    
-  <input id="tab3" type="radio" name="tabs">
-  <label for="tab3">Associates</label>
-    
-  <input id="tab4" type="radio" name="tabs">
-  <label for="tab4">Group Managers</label>
-    
-  <section id="content1">
-    <h3>Company Profile</h3>
-      <p>National Association of Housing and Redevelopment Officials<br />
-      630 I St NW<br />
-      Washington, DC 20001-3736</p>
-  </section>
-    
-  <section id="content2">
-      
-   <uc1:ctrlEmplyees ID="ucEmp" runat="server" />
-      
-  </section>
-    
-  <section id="content3">
-   <uc1:ctrlAssociates ID="ucAsc" runat="server" />
-  </section>
-    
-  <section id="content4">
-    <uc1:ctrlManagers ID="ucManager" runat="server" />
-  </section>
-    
+    </style>--%>
 
-   </main>
+    <main class="col-sm-11 offset-sm-1 col-md-11 offset-md-1 pt-3">
+        <div id="tabs">
+            <ul>
+                <li><a href="#tabs-0">Company Profile</a></li>
+                <li><a href="#tabs-1">Employees</a></li>
+                <li><a href="#tabs-2">Associates</a></li>
+                <li><a href="#tabs-3">Group Managers</a></li>
+            </ul>
+
+            <!--WebUserControl.ascx-->
+            <div id="tabs-0">
+                <uc1:ctrlAgency id="ctrl1" runat="server" />
+            </div>
+            <div id="tabs-1">
+                <uc1:ctrlEmplyees id="ctrl2" runat="server" />
+            </div>
+            <div id="tabs-2">
+                <uc1:ctrlAssociates id="ctrl3" runat="server" />
+            </div>
+            <div id="tabs-3">
+                <uc1:ctrlManagers id="ctrl4" runat="server" />
+            </div>
+
+        </div>
+
+
+        <%-- <input id="tab1" type="radio" name="tabs" checked>
+        <label for="tab1">Company Profile</label>
+
+        <input id="tab2" type="radio" name="tabs">
+        <label for="tab2">Employees</label>
+
+        <input id="tab3" type="radio" name="tabs">
+        <label for="tab3">Associates</label>
+
+        <input id="tab4" type="radio" name="tabs">
+        <label for="tab4">Group Managers</label>
+
+        <section id="content1">
+            <h3>Company Profile</h3>
+            <p>
+                National Association of Housing and Redevelopment Officials<br />
+                630 I St NW<br />
+                Washington, DC 20001-3736
+            </p>
+        </section>
+
+        <section id="content2">
+
+            <uc1:ctrlEmplyees ID="ucEmp" runat="server" ClientIDMode="Static" />
+
+        </section>
+
+        <section id="content3">
+            <uc1:ctrlAssociates ID="ucAsc" runat="server" ClientIDMode="Static" />
+        </section>
+
+        <section id="content4">
+            <uc1:ctrlManagers ID="ucManager" runat="server" ClientIDMode="Static" />
+        </section>--%>
+    </main>
+
+    <asp:HiddenField ID="hidLastTab" ClientIDMode="Static" Value="0" runat="server" />
+
+    <script type="text/javascript">
+
+
+        $('#tabs').tabs({
+            activate: function (event, ui) {
+                var newIdx = $('#tabs').tabs('option', 'active');
+                $('#<%=hidLastTab.ClientID%>').val(newIdx);
+                //getUsercontrol(newIdx);
+                //$('#tabs' + newIdx).html(getUsercontrol(newIdx));
+            },
+            active: previouslySelectedTab,
+            show: { effect: "fadeIn", duration: 1000 }
+           
+        });
+        function getUsercontrol(thistab) {
+            switch (thistab) {
+                case 0:
+                    userControlName = "Controls/ctrlAgencyDetails.ascx";
+                    $("#tabs-" + thistab).load(userControlName);
+                    break
+                case 1:
+                    userControlName = "Controls/ctrlEmplyees.ascx";
+                    $("#tabs-" + thistab).load(userControlName);
+                    break;
+                case 3:
+                    userControlName = "Controls/ctrlAssociates.ascx";
+                    $("#tabs-" + thistab).load(userControlName);
+                    break
+                case 4:
+                    userControlName = "Controls/ctrlManagers.ascx";
+                    $("#tabs-" + thistab).load(userControlName);
+                    break;
+            }
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "AgencyDetails.aspx/GetUserControl",
+            //    data: "{controlName:'" + userControlName + "'}",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (result) {
+            //        //$("#tabs-" + thistab).empty();
+            //        //$("#tabs-" + thistab).html(result.d);
+            //    }
+
+            //});
+
+        }
+
+
+
+    </script>
 </asp:Content>

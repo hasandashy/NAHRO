@@ -1,11 +1,13 @@
 ﻿using NAHRO.DomainServices;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Services;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace NAHRO.WEB
@@ -14,37 +16,33 @@ namespace NAHRO.WEB
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            String hiddenFieldValue = hidLastTab.Value;
+            StringBuilder js = new StringBuilder();
+            js.Append("<script type='text/javascript'>");
+            js.Append("var previouslySelectedTab = ");
+            js.Append(hiddenFieldValue);
+            js.Append(";</script>");
+            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "acttab", js.ToString());
         }
 
         [WebMethod]
-        public static void EmpExport()
+        public static string GetUserControl(string controlName)
         {
-            string fileName = "Employees.xls";
 
-            EmployeeServices employeeServices = new EmployeeServices();
+            using (Page page = new Page())
+            {
+                HtmlForm form = new HtmlForm();
+                UserControl userControl = (UserControl)page.LoadControl("~/Controls/" + controlName);
+                form.Controls.Add(userControl);
+                using (StringWriter writer = new StringWriter())
+                {
+                    page.Controls.Add(form);
+                    HttpContext.Current.Server.Execute(page, writer, false);
+                    return writer.ToString();
+                }
 
-            DataGrid dg = new DataGrid();
-            dg.AllowPaging = false;
-            dg.DataSource = employeeServices.GetAllEmplyees(); ;
-            dg.DataBind();
-
-            System.Web.HttpContext.Current.Response.Clear();
-            System.Web.HttpContext.Current.Response.Buffer = true;
-            System.Web.HttpContext.Current.Response.ContentEncoding = Encoding.UTF8;
-            System.Web.HttpContext.Current.Response.Charset = "";
-            System.Web.HttpContext.Current.Response.AddHeader("Content-Disposition",
-              "attachment; filename=" + fileName);
-
-            System.Web.HttpContext.Current.Response.ContentType =
-              "application/vnd.ms-excel";
-            System.IO.StringWriter stringWriter = new System.IO.StringWriter();
-            System.Web.UI.HtmlTextWriter htmlTextWriter =
-              new System.Web.UI.HtmlTextWriter(stringWriter);
-            dg.RenderControl(htmlTextWriter);
-            System.Web.HttpContext.Current.Response.Write(stringWriter.ToString());
-            System.Web.HttpContext.Current.Response.End();
-
+            }
         }
+
     }
 }

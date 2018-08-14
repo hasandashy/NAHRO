@@ -13,30 +13,48 @@ namespace NAHRO.WEB {
     public partial class AgencyDetails {
         
         /// <summary>
-        /// ucEmp control.
+        /// ctrl1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::NAHRO.WEB.ctrlEmplyees ucEmp;
+        protected global::NAHRO.WEB.Controls.ctrlAgencyDetails ctrl1;
         
         /// <summary>
-        /// ucAsc control.
+        /// ctrl2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::NAHRO.WEB.Controls.ctrlAssociates ucAsc;
+        protected global::NAHRO.WEB.ctrlEmplyees ctrl2;
         
         /// <summary>
-        /// ucManager control.
+        /// ctrl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::NAHRO.WEB.Controls.ctrlManagers ucManager;
+        protected global::NAHRO.WEB.Controls.ctrlAssociates ctrl3;
+        
+        /// <summary>
+        /// ctrl4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::NAHRO.WEB.Controls.ctrlManagers ctrl4;
+        
+        /// <summary>
+        /// hidLastTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidLastTab;
     }
 }
