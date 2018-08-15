@@ -13,7 +13,7 @@ namespace NAHRO.WEB.Controls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            //if (!Page.IsPostBack)
                 BindData();
         }
 
@@ -22,6 +22,8 @@ namespace NAHRO.WEB.Controls
             AssociateServices ascServices = new AssociateServices();
             lstEmployee.DataSource = ascServices.GetAllAssociates();
             lstEmployee.DataBind();
+            HiddenField hf = (HiddenField)Parent.FindControl("hidLastTab");
+            hf.Value = "2";
         }
 
         protected void lstEmployee_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -33,6 +35,12 @@ namespace NAHRO.WEB.Controls
                 ascServices.DeleteAssociate(id);
                 BindData();
             }
+        }
+
+        protected void OnPagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (lstEmployee.FindControl("dtPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.BindData();
         }
 
         protected void btnD_Click(object sender, EventArgs e)

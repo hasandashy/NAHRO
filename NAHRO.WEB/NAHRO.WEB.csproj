@@ -69,14 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AgencyDetails.aspx" />
+    <Content Include="Associates.aspx" />
     <Content Include="Controls\ctrlAgencyDetails.ascx" />
     <Content Include="Controls\ctrlAssociates.ascx" />
     <Content Include="Controls\ctrlManagers.ascx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\dashboard.css" />
     <Content Include="Controls\ctrlEmplyees.ascx" />
-    <Content Include="Default.aspx" />
+    <Content Include="Employees.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="GroupManagers.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +88,13 @@
     </Compile>
     <Compile Include="AgencyDetails.aspx.designer.cs">
       <DependentUpon>AgencyDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associates.aspx.cs">
+      <DependentUpon>Associates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associates.aspx.designer.cs">
+      <DependentUpon>Associates.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ctrlAgencyDetails.ascx.cs">
       <DependentUpon>ctrlAgencyDetails.ascx</DependentUpon>
@@ -115,17 +124,23 @@
     <Compile Include="Controls\ctrlManagers.ascx.designer.cs">
       <DependentUpon>ctrlManagers.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Employees.aspx.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Employees.aspx.designer.cs">
+      <DependentUpon>Employees.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="jQueryHandler.cs" />
+    <Compile Include="GroupManagers.aspx.cs">
+      <DependentUpon>GroupManagers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GroupManagers.aspx.designer.cs">
+      <DependentUpon>GroupManagers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

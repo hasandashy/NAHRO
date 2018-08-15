@@ -23,6 +23,8 @@ namespace NAHRO.WEB
             EmployeeServices employeeServices = new EmployeeServices();
             lstEmployee.DataSource = employeeServices.GetAllEmplyees();
             lstEmployee.DataBind();
+            HiddenField hf = (HiddenField)Parent.FindControl("hidLastTab");
+            hf.Value = "1";
         }
 
         protected void lstEmployee_ItemCommand(object sender, ListViewCommandEventArgs e)
@@ -35,6 +37,13 @@ namespace NAHRO.WEB
                 BindData();
             }
         }
+
+        protected void OnPagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (lstEmployee.FindControl("dtPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.BindData();
+        }
+
 
         protected void btnD_Click(object sender, EventArgs e)
         {

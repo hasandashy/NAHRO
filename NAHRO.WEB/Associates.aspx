@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AgencyDetails.aspx.cs" Inherits="NAHRO.WEB.AgencyDetails" %>
-
-<%@ Register Src="~/Controls/ctrlAgencyDetails.ascx" TagPrefix="uc1" TagName="ctrlAgency" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Associates.aspx.cs" Inherits="NAHRO.WEB.Associates" %>
 <%--<%@ Register Src="~/Controls/ctrlEmplyees.ascx" TagPrefix="uc1" TagName="ctrlEmplyees" %>
+<%@ Register Src="~/Controls/ctrlEmplyees.ascx" TagPrefix="uc1" TagName="ctrlEmplyees" %>
 <%@ Register Src="~/Controls/ctrlAssociates.ascx" TagPrefix="uc1" TagName="ctrlAssociates" %>
 <%@ Register Src="~/Controls/ctrlManagers.ascx" TagPrefix="uc1" TagName="ctrlManagers" %>--%>
+<%@ Register Src="~/Controls/ctrlAssociates.ascx" TagPrefix="uc1" TagName="ctrlAssociates" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -21,13 +21,13 @@
 
             <!--WebUserControl.ascx-->
             <div id="tabs-0">
-                <uc1:ctrlAgency ID="ctrl1" runat="server" />
+                <%--<uc1:ctrlAgency ID="ctrl1" runat="server" />--%>
             </div>
             <div id="tabs-1">
-               <%-- <uc1:ctrlEmplyees ID="ctrl2" runat="server" />--%>
+                <%--<uc1:ctrlEmplyees ID="ctrl2" runat="server" />--%>
             </div>
             <div id="tabs-2">
-               <%-- <uc1:ctrlAssociates ID="ctrl3" runat="server" />--%>
+                <uc1:ctrlAssociates ID="ctrl3" runat="server" />
             </div>
             <div id="tabs-3">
                 <%--<uc1:ctrlManagers ID="ctrl4" runat="server" />--%>
@@ -36,11 +36,10 @@
     </main>
 
     <asp:HiddenField ID="hidLastTab" ClientIDMode="Static" Value="0" runat="server" />
-    <asp:HiddenField ID="hidTab" ClientIDMode="Static" Value="0" runat="server" />
+    <asp:HiddenField ID="hidTab" ClientIDMode="Static" Value="2" runat="server" />
 
     <script type="text/javascript">
 
-      
 
         $('#tabs').tabs({
             activate: function (event, ui) {

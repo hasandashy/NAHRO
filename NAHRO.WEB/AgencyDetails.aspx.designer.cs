@@ -22,33 +22,6 @@ namespace NAHRO.WEB {
         protected global::NAHRO.WEB.Controls.ctrlAgencyDetails ctrl1;
         
         /// <summary>
-        /// ctrl2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::NAHRO.WEB.ctrlEmplyees ctrl2;
-        
-        /// <summary>
-        /// ctrl3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::NAHRO.WEB.Controls.ctrlAssociates ctrl3;
-        
-        /// <summary>
-        /// ctrl4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::NAHRO.WEB.Controls.ctrlManagers ctrl4;
-        
-        /// <summary>
         /// hidLastTab control.
         /// </summary>
         /// <remarks>
@@ -56,5 +29,14 @@ namespace NAHRO.WEB {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidLastTab;
+        
+        /// <summary>
+        /// hidTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidTab;
     }
 }

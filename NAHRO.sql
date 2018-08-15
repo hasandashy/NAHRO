@@ -1,38 +1,44 @@
 USE [NAHRO]
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllManagers]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllManagers]    Script Date: 8/16/2018 12:00:22 AM ******/
 DROP PROCEDURE [dbo].[spGetAllManagers]
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllEmployees]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllEmployees]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP PROCEDURE [dbo].[spGetAllEmployees]
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllAssociates]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllAssociates]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP PROCEDURE [dbo].[spGetAllAssociates]
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteManagers]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAgencyDetailsById]    Script Date: 8/16/2018 12:00:23 AM ******/
+DROP PROCEDURE [dbo].[spGetAgencyDetailsById]
+GO
+/****** Object:  StoredProcedure [dbo].[spDeleteManagers]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP PROCEDURE [dbo].[spDeleteManagers]
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP PROCEDURE [dbo].[spDeleteEmployee]
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteAssociate]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteAssociate]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP PROCEDURE [dbo].[spDeleteAssociate]
 GO
-/****** Object:  Table [dbo].[GroupManagers]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  Table [dbo].[GroupManagers]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP TABLE [dbo].[GroupManagers]
 GO
-/****** Object:  Table [dbo].[Employees]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  Table [dbo].[Employees]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP TABLE [dbo].[Employees]
 GO
-/****** Object:  Table [dbo].[Associates]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  Table [dbo].[Associates]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP TABLE [dbo].[Associates]
+GO
+/****** Object:  Table [dbo].[Agencies]    Script Date: 8/16/2018 12:00:23 AM ******/
+DROP TABLE [dbo].[Agencies]
 GO
 USE [master]
 GO
-/****** Object:  Database [NAHRO]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  Database [NAHRO]    Script Date: 8/16/2018 12:00:23 AM ******/
 DROP DATABASE [NAHRO]
 GO
-/****** Object:  Database [NAHRO]    Script Date: 8/13/2018 8:48:47 PM ******/
+/****** Object:  Database [NAHRO]    Script Date: 8/16/2018 12:00:23 AM ******/
 CREATE DATABASE [NAHRO]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -129,7 +135,22 @@ ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES =
 GO
 USE [NAHRO]
 GO
-/****** Object:  Table [dbo].[Associates]    Script Date: 8/13/2018 8:48:48 PM ******/
+/****** Object:  Table [dbo].[Agencies]    Script Date: 8/16/2018 12:00:23 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Agencies](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[AgencyName] [varchar](150) NULL,
+	[Address] [varchar](250) NULL,
+ CONSTRAINT [PK_Agencies] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Associates]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -153,7 +174,7 @@ CREATE TABLE [dbo].[Associates](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Employees]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  Table [dbo].[Employees]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -175,7 +196,7 @@ CREATE TABLE [dbo].[Employees](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[GroupManagers]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  Table [dbo].[GroupManagers]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -197,9 +218,16 @@ CREATE TABLE [dbo].[GroupManagers](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+SET IDENTITY_INSERT [dbo].[Agencies] ON 
+GO
+INSERT [dbo].[Agencies] ([Id], [AgencyName], [Address]) VALUES (1, N'National Association of Housing and Redevelopment Officials', N'630 I St NW
+Washington, DC 20001-3736')
+GO
+SET IDENTITY_INSERT [dbo].[Agencies] OFF
+GO
 SET IDENTITY_INSERT [dbo].[Associates] ON 
 GO
-INSERT [dbo].[Associates] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [CurrentOrder], [ProformaOrder], [IsDeleted]) VALUES (1, N'00000001', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:07:14.717' AS DateTime), NULL, N'0000000003A5', N'0000000003A5', 0)
+INSERT [dbo].[Associates] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [CurrentOrder], [ProformaOrder], [IsDeleted]) VALUES (1, N'00000001', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:07:14.717' AS DateTime), CAST(N'2018-08-15T06:24:11.487' AS DateTime), N'0000000003A5', N'0000000003A5', 1)
 GO
 INSERT [dbo].[Associates] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [CurrentOrder], [ProformaOrder], [IsDeleted]) VALUES (2, N'00000002', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:07:18.113' AS DateTime), NULL, N'0000000003A5', N'0000000003A5', 0)
 GO
@@ -209,11 +237,17 @@ SET IDENTITY_INSERT [dbo].[Associates] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Employees] ON 
 GO
-INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (3, N'00000001', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:48.807' AS DateTime), NULL, 0)
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (3, N'00000001', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:48.807' AS DateTime), CAST(N'2018-08-15T23:58:11.133' AS DateTime), 1)
 GO
-INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (4, N'00000002', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:56.230' AS DateTime), NULL, 0)
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (4, N'00000002', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:56.230' AS DateTime), CAST(N'2018-08-15T23:29:11.480' AS DateTime), 0)
 GO
-INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (5, N'00000003', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:59.820' AS DateTime), NULL, 0)
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (5, N'00000003', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:59.820' AS DateTime), CAST(N'2018-08-15T16:32:12.513' AS DateTime), 0)
+GO
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (6, N'00000001', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:48.807' AS DateTime), CAST(N'2018-08-15T06:05:16.660' AS DateTime), 0)
+GO
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (7, N'00000002', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:56.230' AS DateTime), CAST(N'2018-08-15T16:02:15.690' AS DateTime), 0)
+GO
+INSERT [dbo].[Employees] ([Id], [EmpId], [Name], [JobTitle], [Email], [MembershipType], [IsMember], [MembershipStartDate], [MembershipEndDate], [IsDeleted]) VALUES (8, N'00000003', N'test', N'test', N'test@test.com', N'Test', 1, CAST(N'2018-08-13T20:05:59.820' AS DateTime), NULL, 0)
 GO
 SET IDENTITY_INSERT [dbo].[Employees] OFF
 GO
@@ -227,7 +261,7 @@ INSERT [dbo].[GroupManagers] ([Id], [EmpId], [Name], [JobTitle], [Email], [Membe
 GO
 SET IDENTITY_INSERT [dbo].[GroupManagers] OFF
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteAssociate]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteAssociate]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -252,7 +286,7 @@ BEGIN
 	where Id = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -277,7 +311,7 @@ BEGIN
 	where Id = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spDeleteManagers]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spDeleteManagers]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -302,7 +336,30 @@ BEGIN
 	where Id = @id
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllAssociates]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAgencyDetailsById]    Script Date: 8/16/2018 12:00:24 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[spGetAgencyDetailsById]
+	-- Add the parameters for the stored procedure here
+	@id int
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	Select * from [dbo].[Agencies] where Id = @id
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllAssociates]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -324,7 +381,7 @@ BEGIN
 	SELECT * from Associates where isDeleted = 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllEmployees]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllEmployees]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -346,7 +403,7 @@ BEGIN
 	SELECT * from Employees where isDeleted = 0
 END
 GO
-/****** Object:  StoredProcedure [dbo].[spGetAllManagers]    Script Date: 8/13/2018 8:48:49 PM ******/
+/****** Object:  StoredProcedure [dbo].[spGetAllManagers]    Script Date: 8/16/2018 12:00:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

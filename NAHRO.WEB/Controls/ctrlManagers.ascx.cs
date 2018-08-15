@@ -13,8 +13,7 @@ namespace NAHRO.WEB.Controls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-                BindData();
+             BindData();
         }
 
         void BindData()
@@ -22,6 +21,14 @@ namespace NAHRO.WEB.Controls
             ManagerServices ascServices = new ManagerServices();
             lstEmployee.DataSource = ascServices.GetAllManagers();
             lstEmployee.DataBind();
+            HiddenField hf = (HiddenField)Parent.FindControl("hidLastTab");
+            hf.Value = "3";
+        }
+
+        protected void OnPagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            (lstEmployee.FindControl("dtPager") as DataPager).SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
+            this.BindData();
         }
 
         protected void lstEmployee_ItemCommand(object sender, ListViewCommandEventArgs e)

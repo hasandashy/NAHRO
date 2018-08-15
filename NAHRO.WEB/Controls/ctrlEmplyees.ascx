@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctrlEmplyees.ascx.cs" Inherits="NAHRO.WEB.ctrlEmplyees" %>
-<p>National Association of Housing and Redevelopment Officials</p>
+
+<p> <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
 <br />
 <div class="row">
     <div class="col-sm-6 col-md-6">
@@ -18,7 +19,7 @@
 <br />
 
 <div class="table-responsive">
-    <asp:ListView ID="lstEmployee" runat="server" OnItemCommand="lstEmployee_ItemCommand">
+    <asp:ListView ID="lstEmployee" runat="server" OnItemCommand="lstEmployee_ItemCommand" OnPagePropertiesChanging="OnPagePropertiesChanging">
         <LayoutTemplate>
             <table class="table table-striped">
                 <thead>
@@ -37,6 +38,19 @@
 
 
                 </tbody>
+                <tr>
+                    <td colspan="6">
+                        <asp:DataPager ID="dtPager" runat="server" PagedControlID="lstEmployee" PageSize="2">
+                            <Fields>
+                                <asp:NextPreviousPagerField ButtonType="Link" ShowFirstPageButton="false" ShowPreviousPageButton="true"
+                                    ShowNextPageButton="false" />
+                                <asp:NumericPagerField ButtonType="Link" />
+                                <asp:NextPreviousPagerField ButtonType="Link" ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" />
+                            </Fields>
+                        </asp:DataPager>
+                    </td>
+                </tr>
+
             </table>
 
         </LayoutTemplate>
@@ -48,7 +62,7 @@
                 <td><%# Eval("Email")%></td>
                 <td><%# Eval("MembershipType")%></td>
                 <td>
-                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Remove" OnClientClick="return confirm('Are you certain you want to delete this record?');"></asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Remove" OnClientClick="return ConfirmDelete();"></asp:LinkButton>
                 </td>
             </tr>
         </ItemTemplate>
@@ -63,7 +77,31 @@
     </asp:ListView>
 </div>
 
+
+<script type="text/javascript">
+    function ConfirmDelete() {
+
+
+        $.confirm({
+            title: 'Confirm End Of Relationship!',
+            content: 'Are you you want to end relationship with this person?',
+            buttons: {
+                confirm: 
+                function() {
+                    javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
+                },
+                cancel: function () {
+                    $.alert('Canceled!');
+                }
+            }
+        });
+        return false;
+    }
+
+</script>
+
 <script type="text/javascript">   
+
     //Called this method on any button click  event for Testing
     $("#btnGo").click(function (e) {
         e.preventDefault();

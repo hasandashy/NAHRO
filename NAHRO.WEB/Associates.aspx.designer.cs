@@ -7,27 +7,36 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAHRO.WEB.Controls {
+namespace NAHRO.WEB {
     
     
-    public partial class ctrlAgencyDetails {
+    public partial class Associates {
         
         /// <summary>
-        /// lblAgencyName control.
+        /// ctrl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAgencyName;
+        protected global::NAHRO.WEB.Controls.ctrlAssociates ctrl3;
         
         /// <summary>
-        /// lblAddress control.
+        /// hidLastTab control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAddress;
+        protected global::System.Web.UI.WebControls.HiddenField hidLastTab;
+        
+        /// <summary>
+        /// hidTab control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hidTab;
     }
 }

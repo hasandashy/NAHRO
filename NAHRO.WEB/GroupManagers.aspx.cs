@@ -2,19 +2,18 @@
 using NAHRO.DomainServices;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
-using System.Web.Services;
 using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace NAHRO.WEB
 {
-    public partial class AgencyDetails : System.Web.UI.Page
+    public partial class GroupManagers : System.Web.UI.Page
     {
+        private object ctrl3;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             String hiddenFieldValue = hidTab.Value;
@@ -33,12 +32,9 @@ namespace NAHRO.WEB
             AgencyServices services = new AgencyServices();
             Agency agency = services.GetAgencyById(agencyId);
 
-            (ctrl1.FindControl("lblAgencyName") as Label).Text = agency.AgencyName;
-            (ctrl1.FindControl("lblAddress") as Label).Text = agency.Address;
-            
+           (ctrl4.FindControl("lblAgencyName") as Label).Text = agency.AgencyName;
+
 
         }
-
-
     }
 }
