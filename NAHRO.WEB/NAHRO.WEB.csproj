@@ -68,20 +68,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddAssociate.aspx" />
+    <Content Include="AddEmployee.aspx" />
+    <Content Include="AddManager.aspx" />
     <Content Include="AgencyDetails.aspx" />
     <Content Include="Associates.aspx" />
+    <Content Include="Controls\ctrlAddAssociate.ascx" />
     <Content Include="Controls\ctrlAgencyDetails.ascx" />
     <Content Include="Controls\ctrlAssociates.ascx" />
+    <Content Include="Controls\ctrlCheckEmployee.ascx" />
+    <Content Include="Controls\ctrlEmployeeEdit.ascx" />
+    <Content Include="Controls\ctrlGroupManagerAdd.ascx" />
     <Content Include="Controls\ctrlManagers.ascx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\dashboard.css" />
     <Content Include="Controls\ctrlEmplyees.ascx" />
+    <Content Include="EditEmployee.aspx" />
     <Content Include="Employees.aspx" />
     <Content Include="Global.asax" />
     <Content Include="GroupManagers.aspx" />
+    <Content Include="images\calendar.gif" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAssociate.aspx.cs">
+      <DependentUpon>AddAssociate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddAssociate.aspx.designer.cs">
+      <DependentUpon>AddAssociate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddEmployee.aspx.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddEmployee.aspx.designer.cs">
+      <DependentUpon>AddEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddManager.aspx.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddManager.aspx.designer.cs">
+      <DependentUpon>AddManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AgencyDetails.aspx.cs">
       <DependentUpon>AgencyDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -95,6 +125,13 @@
     </Compile>
     <Compile Include="Associates.aspx.designer.cs">
       <DependentUpon>Associates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctrlAddAssociate.ascx.cs">
+      <DependentUpon>ctrlAddAssociate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlAddAssociate.ascx.designer.cs">
+      <DependentUpon>ctrlAddAssociate.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controls\ctrlAgencyDetails.ascx.cs">
       <DependentUpon>ctrlAgencyDetails.ascx</DependentUpon>
@@ -110,6 +147,20 @@
     <Compile Include="Controls\ctrlAssociates.ascx.designer.cs">
       <DependentUpon>ctrlAssociates.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ctrlCheckEmployee.ascx.cs">
+      <DependentUpon>ctrlCheckEmployee.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlCheckEmployee.ascx.designer.cs">
+      <DependentUpon>ctrlCheckEmployee.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ctrlEmployeeEdit.ascx.cs">
+      <DependentUpon>ctrlEmployeeEdit.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlEmployeeEdit.ascx.designer.cs">
+      <DependentUpon>ctrlEmployeeEdit.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ctrlEmplyees.ascx.cs">
       <DependentUpon>ctrlEmplyees.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -117,12 +168,26 @@
     <Compile Include="Controls\ctrlEmplyees.ascx.designer.cs">
       <DependentUpon>ctrlEmplyees.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ctrlGroupManagerAdd.ascx.cs">
+      <DependentUpon>ctrlGroupManagerAdd.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ctrlGroupManagerAdd.ascx.designer.cs">
+      <DependentUpon>ctrlGroupManagerAdd.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ctrlManagers.ascx.cs">
       <DependentUpon>ctrlManagers.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\ctrlManagers.ascx.designer.cs">
       <DependentUpon>ctrlManagers.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EditEmployee.aspx.cs">
+      <DependentUpon>EditEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditEmployee.aspx.designer.cs">
+      <DependentUpon>EditEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employees.aspx.cs">
       <DependentUpon>Employees.aspx</DependentUpon>

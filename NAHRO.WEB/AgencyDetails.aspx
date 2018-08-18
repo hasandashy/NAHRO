@@ -24,23 +24,23 @@
                 <uc1:ctrlAgency ID="ctrl1" runat="server" />
             </div>
             <div id="tabs-1">
-               <%-- <uc1:ctrlEmplyees ID="ctrl2" runat="server" />--%>
+                <%-- <uc1:ctrlEmplyees ID="ctrl2" runat="server" />--%>
             </div>
             <div id="tabs-2">
-               <%-- <uc1:ctrlAssociates ID="ctrl3" runat="server" />--%>
+                <%-- <uc1:ctrlAssociates ID="ctrl3" runat="server" />--%>
             </div>
             <div id="tabs-3">
                 <%--<uc1:ctrlManagers ID="ctrl4" runat="server" />--%>
             </div>
         </div>
     </main>
-
-    <asp:HiddenField ID="hidLastTab" ClientIDMode="Static" Value="0" runat="server" />
-    <asp:HiddenField ID="hidTab" ClientIDMode="Static" Value="0" runat="server" />
-
+    <form runat="server">
+        <asp:HiddenField ID="hidLastTab" ClientIDMode="Static" Value="0" runat="server" />
+        <asp:HiddenField ID="hidTab" ClientIDMode="Static" Value="0" runat="server" />
+    </form>
     <script type="text/javascript">
 
-      
+
 
         $('#tabs').tabs({
             activate: function (event, ui) {
@@ -50,15 +50,15 @@
                     window.location.href = "AgencyDetails.aspx";
 
                 }
-                 if (newIdx == 1) {
+                if (newIdx == 1) {
                     window.location.href = "Employees.aspx";
 
                 }
-                 if (newIdx == 2) {
+                if (newIdx == 2) {
                     window.location.href = "Associates.aspx";
 
                 }
-                 if (newIdx == 3) {
+                if (newIdx == 3) {
                     window.location.href = "GroupManagers.aspx";
 
                 }

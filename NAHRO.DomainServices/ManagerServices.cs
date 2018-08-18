@@ -11,12 +11,31 @@ namespace NAHRO.DomainServices
 {
     interface IManagerService
     {
+        void AddManager(int id);
         List<GroupManager> GetAllManagers();
         void DeleteManager(int id);
+        List<GroupManager> GetNewManagers();
     }
 
     public class ManagerServices : IManagerService
     {
+        public void AddManager(int id)
+        {
+            using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-V3VNLNG\\SQLEXPRESS;Database=NAHRO;Trusted_Connection=Yes;"))
+            {
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Id", id);
+                command.CommandText = "spAddManager";
+
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
         public void DeleteManager(int id)
         {
             using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-V3VNLNG\\SQLEXPRESS;Database=NAHRO;Trusted_Connection=Yes;"))
@@ -52,6 +71,27 @@ namespace NAHRO.DomainServices
 
             return employees;
 
+        }
+
+        public List<GroupManager> GetNewManagers()
+        {
+            DataTable table = new DataTable("Table");
+            using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-V3VNLNG\\SQLEXPRESS;Database=NAHRO;Trusted_Connection=Yes;"))
+            {
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "spGetNewManagers";
+
+                connection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(table);
+            }
+
+            List<GroupManager> employees = new List<GroupManager>();
+            employees = Utills.ConvertDataTable<GroupManager>(table);
+
+            return employees;
         }
     }
 }

@@ -10,7 +10,7 @@
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Employee</button>
+            <input type=button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddAssociate.aspx';" value="Add Associate" />
         </div>
     </div>
 </div>

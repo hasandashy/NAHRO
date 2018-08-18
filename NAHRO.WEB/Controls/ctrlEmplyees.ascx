@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Employee</button>
+            <input type=button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddEmployee.aspx';" value="Add Employee" />
         </div>
     </div>
 </div>
@@ -57,7 +57,7 @@
         <ItemTemplate>
             <tr>
                 <td><%# Eval("EmpId")%></td>
-                <td><%# Eval("Name")%></td>
+                <td><%# Eval("FirstName") + " " + Eval("MiddleName") + " " + Eval("LastName") %></td>
                 <td><%# Eval("JobTitle")%></td>
                 <td><%# Eval("Email")%></td>
                 <td><%# Eval("MembershipType")%></td>
