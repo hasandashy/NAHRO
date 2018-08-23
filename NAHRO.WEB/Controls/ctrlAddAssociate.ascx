@@ -3,21 +3,21 @@
 <br />
 <div class="row">
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Total Associates Allowed : <%= totalAssociates %>
-        </div>
+        
        
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Current Associates : <%= associatesAssigned %>
-        </div>
+        
      
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Total Associates Available : <%= associatesAvailable %>
-        </div>
+        
         
     </div>
 </div>
@@ -106,7 +106,7 @@ $(function () {
         
         var associate =<%= this.associatesAvailable %>;
         if (totalChecked > associate) {
-            alert('You can only select ' + associate + ' associates.');
+            $.alert('You can only select ' + associate + ' associates.');
             return false;
         }
 

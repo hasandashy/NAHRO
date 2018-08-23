@@ -3,21 +3,21 @@
 <br />
 <div class="row">
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Total Managers Allowed : <%= totalManagers %>
-        </div>
+        
        
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Current Managers : <%= managersAssigned %>
-        </div>
+        
      
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
+        
             Total Managers Available : <%= managersAvailable %>
-        </div>
+        
         
     </div>
 </div>
@@ -100,7 +100,7 @@
         
         var manager =<%= this.managersAvailable %>;
         if (totalChecked > manager) {
-            alert('You can only select ' + manager + ' managers.');
+            $.alert('You can only select ' + manager + ' managers.');
             return false;
         }
 

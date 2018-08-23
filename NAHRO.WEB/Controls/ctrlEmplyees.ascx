@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctrlEmplyees.ascx.cs" Inherits="NAHRO.WEB.ctrlEmplyees" %>
 
-<p> <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
+<p>
+    <asp:Label ID="lblAgencyName" ClientIDMode="Static" runat="server"></asp:Label>
+</p>
 <br />
 <div class="row">
     <div class="col-sm-6 col-md-6">
@@ -12,7 +14,7 @@
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-            <input type=button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddEmployee.aspx';" value="Add Employee" />
+            <input type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="javascript: window.location.href = 'AddEmployee.aspx';" value="Add Employee" />
         </div>
     </div>
 </div>
@@ -84,12 +86,18 @@
 
         $.confirm({
             title: 'Confirm End Of Relationship!',
-            content: 'Are you you want to end relationship with this person?',
+            content: '' +
+                '<div>' +
+                '<label>Are you sure you want to end relationship?</label><br />' +
+                '<label>Agency:' + $('#lblAgencyName').text() + '<label>' +
+                '</div>'
+                ,
+
             buttons: {
-                confirm: 
-                function() {
-                    javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
-                },
+                confirm:
+                    function () {
+                        javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
+                    },
                 cancel: function () {
                     $.alert('Canceled!');
                 }
@@ -103,7 +111,7 @@
             if (str == "Previous" || str == "Next") {
                 $(this).hide();
             }
-            });
+        });
     })
 </script>
 

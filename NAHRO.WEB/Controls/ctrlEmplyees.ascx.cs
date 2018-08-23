@@ -12,6 +12,7 @@ namespace NAHRO.WEB
 {
     public partial class ctrlEmplyees : System.Web.UI.UserControl
     {
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             

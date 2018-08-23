@@ -1,24 +1,19 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctrlManagers.ascx.cs" Inherits="NAHRO.WEB.Controls.ctrlManagers" %>
-<p> <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
+<%@ Register Src="~/Controls/ctrlGroupManagerAdd.ascx" TagPrefix="uc1" TagName="ctrlGroupManagerAdd" %>
+
+
+<p>
+    <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
 <br />
 <div class="row">
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
-            Total Managers Allowed : <%= totalManagers %>
-        </div>
-       
+        Total Managers Allowed : <%= totalManagers %>
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
-            Current Managers : <%= managersAssigned %>
-        </div>
-     
+        Current Managers : <%= managersAssigned %>
     </div>
     <div class="col-sm-12 col-md-12">
-        <div class="col-sm-3 col-md-3">
-            Total Managers Available : <%= managersAvailable %>
-        </div>
-        
+        Total Managers Available : <%= managersAvailable %>
     </div>
 </div>
 <br />
@@ -26,12 +21,13 @@
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
             <span style="font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff; background-image: none; font-weight: bold;">Actions: </span>&nbsp;&nbsp;<%--<input class="form-control mr-sm-2" type="text" placeholder="Export to File">--%>
-            <asp:Button ID="btnD" CommandName="btnD" runat="server" CausesValidation="false" class="btn btn-outline-success my-2 my-sm-0" ClientIDMode="Static" OnClick="btnD_Click" Text="Export to File" /> 
+            <asp:Button ID="btnD" CommandName="btnD" runat="server" CausesValidation="false" class="btn btn-outline-success my-2 my-sm-0" ClientIDMode="Static" OnClick="btnD_Click" Text="Export to File" />
         </div>
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-              <input type=button  class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddManager.aspx';" value="Add Manager" />
+            <%-- <input type=button  class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddManager.aspx';" value="Add Manager" />--%>
+            <input type="button" id="btnAdd" class="btn btn-outline-success my-2 my-sm-0" value="Add Manager" />
         </div>
     </div>
 </div>
@@ -56,7 +52,7 @@
 
 
                 </tbody>
-                  <tr>
+                <tr>
                     <td colspan="6">
                         <asp:DataPager ID="dtPager" runat="server" PagedControlID="lstEmployee" PageSize="2">
                             <Fields>
@@ -92,6 +88,9 @@
         </EmptyDataTemplate>
     </asp:ListView>
 </div>
+<div id="divMemoInfo" style="display: none;">
+    <uc1:ctrlGroupManagerAdd runat="server" ID="ctrlGroupManagerAdd" />
+</div>
 
 
 <script type="text/javascript">
@@ -102,10 +101,10 @@
             title: 'Confirm End Of Relationship!',
             content: 'Are you you want to end relationship with this person?',
             buttons: {
-                confirm: 
-                function() {
-                    javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
-                },
+                confirm:
+                    function () {
+                        javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctrl4$lstEmployee$ctrl0$DeleteButton','')
+                    },
                 cancel: function () {
                     $.alert('Canceled!');
                 }
@@ -120,7 +119,40 @@
             if (str == "Previous" || str == "Next") {
                 $(this).hide();
             }
-            });
+        });
     })
+
+    $(function () {
+        PrepareNOpenDialog();
+        $("#divMemoInfo").parent().appendTo($('form'));
+
+    });
+
+    function PrepareNOpenDialog() {
+
+        $('#divMemoInfo').dialog(); //init the dialog (consider div as a dialog)
+        $('#divMemoInfo').dialog('close'); //prevent the dialog from showing after initiation
+
+        dialogOptions = {
+            modal: true
+            , buttons: {
+                'Close': function () {
+                    $(this).dialog('close');
+                }
+            }
+            , minWidth: 400
+            , minHeight: 200
+            , width: $(window).width() / 1.5 //'auto'
+            , height: 'auto'
+
+        };
+
+        //open dialog when image clicked
+        $('#btnAdd').click(function () {
+            $('#divMemoInfo').dialog(dialogOptions);
+        });
+
+    }
+
 
 </script>
