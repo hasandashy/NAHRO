@@ -10,6 +10,9 @@ namespace NAHRO.WEB.Controls
 {
     public partial class ctrlGroupManagerAdd : System.Web.UI.UserControl
     {
+        protected int totalManagers = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["managersAllowed"]);
+        protected int managersAssigned = 0;
+        protected int managersAvailable = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -21,6 +24,8 @@ namespace NAHRO.WEB.Controls
             ManagerServices ascServices = new ManagerServices();
             lstEmployee.DataSource = ascServices.GetNewManagers();
             lstEmployee.DataBind();
+            managersAssigned = ascServices.GetManagerCount();
+            managersAvailable = totalManagers - managersAssigned;
         }
 
         protected void OnPagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)

@@ -2,6 +2,27 @@
 <p> <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
 <br />
 <div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Total Managers Allowed : <%= totalManagers %>
+        </div>
+       
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Current Managers : <%= managersAssigned %>
+        </div>
+     
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Total Managers Available : <%= managersAvailable %>
+        </div>
+        
+    </div>
+</div>
+<br />
+<div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
             <span style="font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff; background-image: none; font-weight: bold;">Actions: </span>&nbsp;&nbsp;<%--<input class="form-control mr-sm-2" type="text" placeholder="Export to File">--%>
@@ -10,7 +31,7 @@
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-              <input type=button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddManager.aspx';" value="Add Manager" />
+              <input type=button  class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddManager.aspx';" value="Add Manager" />
         </div>
     </div>
 </div>
@@ -92,5 +113,14 @@
         });
         return false;
     }
+
+    $(function () {
+        $(".aspNetDisabled").each(function () {
+            var str = $(this).text();
+            if (str == "Previous" || str == "Next") {
+                $(this).hide();
+            }
+            });
+    })
 
 </script>

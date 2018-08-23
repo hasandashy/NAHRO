@@ -15,6 +15,7 @@ namespace NAHRO.DomainServices
         void DeleteAssociate(int id);
         List<Associates> GetNewAssociates();
         void AddAssociate(int id);
+        int GetAssociatesCount();
     }
     public class AssociateServices : IAssociateService
     {
@@ -73,6 +74,25 @@ namespace NAHRO.DomainServices
 
             return employees;
 
+        }
+
+        public int GetAssociatesCount()
+        {
+            int count = 0;
+            using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-V3VNLNG\\SQLEXPRESS;Database=NAHRO;Trusted_Connection=Yes;"))
+            {
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select count(1) from Associates where isDeleted = 0 and isMember = 1"; 
+
+
+                connection.Open();
+                count = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+            }
+
+            return count;
         }
 
         public List<Associates> GetNewAssociates()

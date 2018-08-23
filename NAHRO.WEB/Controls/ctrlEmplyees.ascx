@@ -97,7 +97,14 @@
         });
         return false;
     }
-
+    $(function () {
+        $(".aspNetDisabled").each(function () {
+            var str = $(this).text();
+            if (str == "Previous" || str == "Next") {
+                $(this).hide();
+            }
+            });
+    })
 </script>
 
 <script type="text/javascript">   

@@ -11,6 +11,9 @@ namespace NAHRO.WEB.Controls
 {
     public partial class ctrlAssociates : System.Web.UI.UserControl
     {
+        protected int totalAssociates = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["associatesAllowed"]);
+        protected int associatesAssigned = 0;
+        protected int associatesAvailable = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (!Page.IsPostBack)
@@ -24,6 +27,8 @@ namespace NAHRO.WEB.Controls
             lstEmployee.DataBind();
             HiddenField hf = (HiddenField)Parent.FindControl("hidLastTab");
             hf.Value = "2";
+            associatesAssigned = ascServices.GetAssociatesCount();
+            associatesAvailable = totalAssociates - associatesAssigned;
         }
 
         protected void lstEmployee_ItemCommand(object sender, ListViewCommandEventArgs e)

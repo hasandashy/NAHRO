@@ -10,6 +10,9 @@ namespace NAHRO.WEB.Controls
 {
     public partial class ctrlAddAssociate : System.Web.UI.UserControl
     {
+        protected int totalAssociates = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["associatesAllowed"]);
+        protected int associatesAssigned = 0;
+        protected int associatesAvailable = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -22,7 +25,8 @@ namespace NAHRO.WEB.Controls
             AssociateServices ascServices = new AssociateServices();
             lstEmployee.DataSource = ascServices.GetNewAssociates();
             lstEmployee.DataBind();
-
+            associatesAssigned = ascServices.GetAssociatesCount();
+            associatesAvailable = totalAssociates - associatesAssigned;
         }
 
         protected void OnPagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)

@@ -11,6 +11,9 @@ namespace NAHRO.WEB.Controls
 {
     public partial class ctrlManagers : System.Web.UI.UserControl
     {
+        protected int totalManagers =Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["managersAllowed"]);
+        protected int managersAssigned = 0;
+        protected int managersAvailable = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
              BindData();
@@ -21,6 +24,8 @@ namespace NAHRO.WEB.Controls
             ManagerServices ascServices = new ManagerServices();
             lstEmployee.DataSource = ascServices.GetAllManagers();
             lstEmployee.DataBind();
+            managersAssigned = ascServices.GetManagerCount();
+            managersAvailable = totalManagers - managersAssigned;
             HiddenField hf = (HiddenField)Parent.FindControl("hidLastTab");
             hf.Value = "3";
         }

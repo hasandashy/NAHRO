@@ -1,16 +1,39 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctrlAssociates.ascx.cs" Inherits="NAHRO.WEB.Controls.ctrlAssociates" %>
-<p> <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
+<p>
+    <asp:Label ID="lblAgencyName" runat="server"></asp:Label>
+</p>
+<br />
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Total Associates Allowed : <%= totalAssociates %>
+        </div>
+       
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Current Associates : <%= associatesAssigned %>
+        </div>
+     
+    </div>
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-3 col-md-3">
+            Total Associates Available : <%= associatesAvailable %>
+        </div>
+        
+    </div>
+</div>
 <br />
 <div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
             <span style="font-size: 1rem; line-height: 1.25; color: #464a4c; background-color: #fff; background-image: none; font-weight: bold;">Actions: </span>&nbsp;&nbsp;<%--<input class="form-control mr-sm-2" type="text" placeholder="Export to File">--%>
-             <asp:Button ID="btnD" CommandName="btnD" runat="server" CausesValidation="false" class="btn btn-outline-success my-2 my-sm-0" ClientIDMode="Static" OnClick="btnD_Click" Text="Export to File" />
+            <asp:Button ID="btnD" CommandName="btnD" runat="server" CausesValidation="false" class="btn btn-outline-success my-2 my-sm-0" ClientIDMode="Static" OnClick="btnD_Click" Text="Export to File" />
         </div>
     </div>
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0" style="float: right;">
-            <input type=button class="btn btn-outline-success my-2 my-sm-0" onclick="javascript:window.location.href='AddAssociate.aspx';" value="Add Associate" />
+            <input type="button" class="btn btn-outline-success my-2 my-sm-0" onclick="javascript: window.location.href = 'AddAssociate.aspx';" value="Add Associate" />
         </div>
     </div>
 </div>
@@ -38,7 +61,7 @@
 
 
                 </tbody>
-                  <tr>
+                <tr>
                     <td colspan="6">
                         <asp:DataPager ID="dtPager" runat="server" PagedControlID="lstEmployee" PageSize="2">
                             <Fields>
@@ -61,7 +84,7 @@
                 <td><%# Eval("MembershipType")%></td>
                 <td><%# Eval("Email")%></td>
                 <td><%# Eval("CurrentOrder")%></td>
-                <td><%# Eval("ProformaOrder")%></td>                
+                <td><%# Eval("ProformaOrder")%></td>
                 <td>
                     <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Terminate" OnClientClick="return ConfirmDelete();"></asp:LinkButton>
                 </td>
@@ -86,10 +109,10 @@
             title: 'Confirm End Of Relationship!',
             content: 'Are you you want to end relationship with this person?',
             buttons: {
-                confirm: 
-                function() {
-                    javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
-                },
+                confirm:
+                    function () {
+                        javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl3$lstEmployee$ctrl0$DeleteButton','')
+                    },
                 cancel: function () {
                     $.alert('Canceled!');
                 }
@@ -97,6 +120,15 @@
         });
         return false;
     }
+
+    $(function () {
+        $(".aspNetDisabled").each(function () {
+            var str = $(this).text();
+            if (str == "Previous" || str == "Next") {
+                $(this).hide();
+            }
+        });
+    })
 
 </script>
 

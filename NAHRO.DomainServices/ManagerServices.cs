@@ -15,6 +15,7 @@ namespace NAHRO.DomainServices
         List<GroupManager> GetAllManagers();
         void DeleteManager(int id);
         List<GroupManager> GetNewManagers();
+        int GetManagerCount();
     }
 
     public class ManagerServices : IManagerService
@@ -71,6 +72,27 @@ namespace NAHRO.DomainServices
 
             return employees;
 
+        }
+
+      
+
+        public int GetManagerCount()
+        {
+            int count = 0;
+            using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-V3VNLNG\\SQLEXPRESS;Database=NAHRO;Trusted_Connection=Yes;"))
+            {
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "select count(1) from GroupManagers WHERE isDeleted = 0 and isMember = 1";
+
+
+                connection.Open();
+                count = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+            }
+
+            return count;
         }
 
         public List<GroupManager> GetNewManagers()
