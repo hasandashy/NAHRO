@@ -44,7 +44,11 @@ namespace NAHRO.WEB.Controls
                 AssociateServices ascServices = new AssociateServices();
                 ascServices.AddAssociate(Convert.ToInt32(hid.Value));
             }
-            Response.Redirect("Associates.aspx");
+
+            string prompt = "$.alert('Associate successfully added.');";
+            this.Page.ClientScript.RegisterStartupScript(typeof(Page), "alert", prompt, true);
+
+            //Response.Redirect("Associates.aspx");
         }
     }
 }

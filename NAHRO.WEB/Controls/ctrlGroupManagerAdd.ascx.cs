@@ -43,8 +43,10 @@ namespace NAHRO.WEB.Controls
                 ManagerServices ascServices = new ManagerServices();
                 ascServices.AddManager(Convert.ToInt32(hid.Value));
             }
+            string prompt = "$.alert('Group Manager successfully added.');";
+            this.Page.ClientScript.RegisterStartupScript(typeof(Page), "alert", prompt, true);            
 
-            Response.Redirect("GroupManagers.aspx");
+            //Response.Redirect("GroupManagers.aspx");
 
         }
     }
