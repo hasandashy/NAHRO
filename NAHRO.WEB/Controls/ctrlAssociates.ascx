@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ctrlAssociates.ascx.cs" Inherits="NAHRO.WEB.Controls.ctrlAssociates" %>
 <p>
-    <asp:Label ID="lblAgencyName" runat="server"></asp:Label>
+    <asp:Label ID="lblAgencyName" ClientIDMode="Static" runat="server"></asp:Label>
 </p>
 <br />
 <div class="row">
@@ -87,7 +87,7 @@
                 <td><%# Eval("CurrentOrder")%></td>
                 <td><%# Eval("ProformaOrder")%></td>
                 <td>
-                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Terminate" OnClientClick="return ConfirmDelete();"></asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Terminate" OnClientClick='<%# string.Format("return ConfirmDelete(\"{0}\", \"{1}\");", Eval("Name"), Eval("Name")) %>'></asp:LinkButton>
                 </td>
             </tr>
         </ItemTemplate>
@@ -103,14 +103,21 @@
 </div>
 
 <script type="text/javascript">
-    function ConfirmDelete() {
+    function ConfirmDelete(firstname,lastname) {
 
 
         $.confirm({
-            title: 'Confirm End Of Relationship!',
-            content: 'Are you you want to end relationship with this person?',
+            boxWidth: '40%',
+            useBootstrap: false,
+            title: 'Confirm Terminate Associate!',
+            content: '' +
+                '<div>' +
+                '<label>Are you sure you want to terminate the associate membership of this person?</label><br />' +
+                '<label>Name:' + lastname + "," + firstname + '</label><br />' +
+                '<label>Agency:' + $('#lblAgencyName').text() + '</label><br />' +
+                '</div>',
             buttons: {
-                confirm:
+                "Terminate":
                     function () {
                         javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl3$lstEmployee$ctrl0$DeleteButton', '');                        
 

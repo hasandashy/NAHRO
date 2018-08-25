@@ -3,7 +3,7 @@
 
 
 <p>
-    <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
+    <asp:Label ID="lblAgencyName" ClientIDMode="Static" runat="server"></asp:Label></p>
 <br />
 <asp:label ID="successMessage" runat="server" ForeColor="Red"></asp:label>
 <br />
@@ -77,7 +77,7 @@
                 <td><%# Eval("JobTitle")%></td>
                 <td><%# Eval("Email")%></td>
                 <td>
-                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Un-Designate" OnClientClick="return ConfirmDelete();"></asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Un-Designate" OnClientClick='<%# string.Format("return ConfirmDelete(\"{0}\", \"{1}\");", Eval("Name"), Eval("Name")) %>'></asp:LinkButton>
                 </td>
             </tr>
         </ItemTemplate>
@@ -97,14 +97,21 @@
 
 
 <script type="text/javascript">
-    function ConfirmDelete() {
+    function ConfirmDelete(firstname,lastname) {
 
 
         $.confirm({
-            title: 'Confirm End Of Relationship!',
-            content: 'Are you you want to end relationship with this person?',
-            buttons: {
-                confirm:
+           boxWidth: '40%',
+            useBootstrap: false,
+            title: 'Confirm Un-designate Group Manager!',
+            content: '' +
+                '<div>' +
+                '<label>Are you sure you want to un-designate this contact from group manager list?</label><br />' +
+                '<label>Name:' + lastname + "," + firstname + '</label><br />' +
+                '<label>Agency:' + $('#lblAgencyName').text() + '</label><br />' +
+                '</div>'
+                ,buttons: {
+                "Un-designate":
                     function () {
                         javascript:__doPostBack('ctl00$ContentPlaceHolder1$ctrl4$lstEmployee$ctrl0$DeleteButton','')
                     },
