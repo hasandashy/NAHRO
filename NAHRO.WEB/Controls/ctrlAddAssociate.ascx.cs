@@ -45,10 +45,10 @@ namespace NAHRO.WEB.Controls
                 ascServices.AddAssociate(Convert.ToInt32(hid.Value));
             }
 
-            string prompt = "$.alert('Associate successfully added.');";
-            this.Page.ClientScript.RegisterStartupScript(typeof(Page), "alert", prompt, true);
-
-            //Response.Redirect("Associates.aspx");
+            //string prompt = "$.alert('Associate successfully added.');";
+            //this.Page.ClientScript.RegisterStartupScript(typeof(Page), "alert", prompt, true);
+            Session["added"] = "1";
+            Response.Redirect("Associates.aspx");
         }
     }
 }

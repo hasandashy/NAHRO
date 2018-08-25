@@ -253,8 +253,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                   //window.location.href = "Employees.aspx";
-                    $.alert("Employee successfully added.");
+                    window.location.href = "Employees.aspx";
+                    //$.alert("Employee successfully added.");
                 },
                 error: function (result) {
                     alert("Error while saving records.");

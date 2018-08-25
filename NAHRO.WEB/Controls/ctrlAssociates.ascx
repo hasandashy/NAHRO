@@ -24,6 +24,7 @@
     </div>
 </div>
 <br />
+<asp:label ID="successMessage" runat="server" ForeColor="Red"></asp:label>
 <div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
@@ -111,7 +112,8 @@
             buttons: {
                 confirm:
                     function () {
-                        javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl3$lstEmployee$ctrl0$DeleteButton','')
+                        javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl3$lstEmployee$ctrl0$DeleteButton', '');                        
+
                     },
                 cancel: function () {
                     $.alert('Canceled!');

@@ -18,6 +18,11 @@ namespace NAHRO.WEB.Controls
         {
             //if (!Page.IsPostBack)
                 BindData();
+            if(Session["added"] != null && Session["added"].ToString() == "1" )
+            {
+                successMessage.Text = "Associate successfully added.";
+                Session["added"] = 0;
+            }
         }
 
         void BindData()
@@ -39,6 +44,7 @@ namespace NAHRO.WEB.Controls
                 AssociateServices ascServices = new AssociateServices();
                 ascServices.DeleteAssociate(id);
                 BindData();
+                successMessage.Text = "Associate successfully terminated.";
             }
         }
 

@@ -23,6 +23,7 @@ namespace NAHRO.WEB
             Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "acttab", js.ToString());
 
             BindData(1);
+
         }
 
         void BindData(int agencyId)

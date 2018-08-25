@@ -17,6 +17,11 @@ namespace NAHRO.WEB
         {
             
                 BindData();
+
+            if (Session["empAdded"] != null && Session["empAdded"].ToString() == "1")
+            {
+                successMessage.Text = "Employee added successfully.";
+            }
         }
 
         void BindData()
@@ -36,6 +41,7 @@ namespace NAHRO.WEB
                 EmployeeServices employeeServices = new EmployeeServices();
                 employeeServices.DeleteEmployee(id);
                 BindData();
+                successMessage.Text = "Employee removed successfully.";
             }
         }
 

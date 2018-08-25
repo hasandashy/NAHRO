@@ -34,7 +34,7 @@ namespace NAHRO.WEB
             return employee.CheckEmail(email);
         }
 
-        [WebMethod]
+        [WebMethod(EnableSession =true)]
         public static void AddEmployee(string email, string prefix, string fname, string mname, string lname,string nickName, string suffix, int agencyId, string phone, string fax, string jobTitle,DateTime membershipStartDate)
         {
             Employee employee = new Employee()
@@ -55,7 +55,7 @@ namespace NAHRO.WEB
 
             EmployeeServices employeeService = new EmployeeServices();
             employeeService.AddEmployee(employee);
-            
+            HttpContext.Current.Session["empAdded"] = "1";
         }
 
         [WebMethod]

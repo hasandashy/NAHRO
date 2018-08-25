@@ -5,6 +5,9 @@
 <p>
     <asp:Label ID="lblAgencyName" runat="server"></asp:Label></p>
 <br />
+<asp:label ID="successMessage" runat="server" ForeColor="Red"></asp:label>
+<br />
+
 <div class="row">
     <div class="col-sm-12 col-md-12">
         Total Managers Allowed : <%= totalManagers %>

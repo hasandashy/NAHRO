@@ -44,6 +44,7 @@ namespace NAHRO.WEB.Controls
                 ManagerServices ascServices = new ManagerServices();
                 ascServices.DeleteManager(id);
                 BindData();
+                successMessage.Text = "Manager removed successfully.";
             }
         }
 

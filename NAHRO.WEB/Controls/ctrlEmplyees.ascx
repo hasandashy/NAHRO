@@ -4,6 +4,9 @@
     <asp:Label ID="lblAgencyName" ClientIDMode="Static" runat="server"></asp:Label>
 </p>
 <br />
+<asp:label ID="successMessage" runat="server" ForeColor="Red"></asp:label>
+<br />
+
 <div class="row">
     <div class="col-sm-6 col-md-6">
         <div class="form-inline mt-2 mt-md-0">
@@ -64,7 +67,7 @@
                 <td><%# Eval("Email")%></td>
                 <td><%# Eval("MembershipType")%></td>
                 <td>
-                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Remove" OnClientClick="return ConfirmDelete();"></asp:LinkButton>
+                    <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Del" CommandArgument='<%# Eval("Id") %>' Text="Remove" OnClientClick='<%# string.Format("return ConfirmDelete(\"{0}\", \"{1}\");", Eval("FirstName"), Eval("LastName")) %>'></asp:LinkButton>
                 </td>
             </tr>
         </ItemTemplate>
@@ -81,24 +84,32 @@
 
 
 <script type="text/javascript">
-    function ConfirmDelete() {
+    $(document).on('focus',"#enddate", function(){
+    $(this).datepicker();
+});
 
+    function ConfirmDelete(firstname, lastname) {
+       
 
         $.confirm({
+            boxWidth: '40%',
+            useBootstrap: false,
             title: 'Confirm End Of Relationship!',
             content: '' +
                 '<div>' +
-                '<label>Are you sure you want to end relationship?</label><br />' +
-                '<label>Agency:' + $('#lblAgencyName').text() + '<label>' +
+                '<label>Are you sure you want to end the employement relationshiip for this person?</label><br />' +
+                '<label>Name:' + lastname + "," + firstname + '</label><br />' +
+                '<label>Agency:' + $('#lblAgencyName').text() + '</label><br />' +
+                 '<label>Effective Date: <input type="text" id="enddate" name="enddate"></label><br />' +
                 '</div>'
                 ,
 
             buttons: {
-                confirm:
+                "End Relationship":
                     function () {
                         javascript: __doPostBack('ctl00$ContentPlaceHolder1$ctrl2$lstEmployee$ctrl0$DeleteButton', '')
                     },
-                cancel: function () {
+                Cancel: function () {
                     $.alert('Canceled!');
                 }
             }

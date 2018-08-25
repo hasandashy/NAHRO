@@ -12,7 +12,7 @@ namespace NAHRO.WEB
 {
     public partial class GroupManagers : System.Web.UI.Page
     {
-        private object ctrl3;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
