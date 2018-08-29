@@ -71,7 +71,7 @@
         <ItemTemplate>
             <tr>
                 <asp:HiddenField ID="HidId" ClientIDMode="Static" runat="server" Value='<%# Eval("Id")%>' />
-                 <td><asp:CheckBox ID="Checkbox"  runat="server" /></td>
+                 <td><asp:CheckBox ID="chkSelect" runat="server" ClientIDMode="Static" /></td>
                 <td><%# Eval("Name")%></td>
                 <td><%# Eval("JobTitle")%></td>
                 <td><%# Eval("Email")%></td>
@@ -92,6 +92,17 @@
             }
             });
     })
+    $(document).ready(function () {
+        $("input:checkbox").click(function () {
+            var totalChecked = $("#lvManager tr input[type='checkbox']:checked").length;
+            var manager =<%= this.managersAvailable %>;
+            if (totalChecked > manager) {
+                $.alert('You can only select ' + manager + ' managers.');
+                return false;
+            }
+        })
+    });
+
 
     function validate() {   
 
