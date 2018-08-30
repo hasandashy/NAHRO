@@ -206,6 +206,7 @@
     <Compile Include="GroupManagers.aspx.designer.cs">
       <DependentUpon>GroupManagers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Helper\LinqExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

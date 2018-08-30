@@ -24,14 +24,14 @@
 <br />
 
 <div class="table-responsive">
-    <asp:ListView ID="lstEmployee" runat="server" OnItemCommand="lstEmployee_ItemCommand" OnPagePropertiesChanging="OnPagePropertiesChanging">
+    <asp:ListView ID="lstEmployee" runat="server" SelectMethod="GetActiveEmployees" OnItemCommand="lstEmployee_ItemCommand" OnPagePropertiesChanging="OnPagePropertiesChanging" onsorting="lstEmployee_Sorting">
         <LayoutTemplate>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Employee ID</th>
-                        <th>Name</th>
-                        <th>Job Title</th>
+                        <th><asp:LinkButton ID="lbEmpID" CommandArgument="EmpId" CommandName="Sort" Text="Employee ID" runat="server" /></th>
+                        <th><asp:LinkButton ID="lbName" CommandArgument="FirstName" CommandName="Sort" Text="Name" runat="server" /></th>
+                        <th><asp:LinkButton ID="lbTitle" CommandArgument="JobTitle" CommandName="Sort" Text="Job Title" runat="server" /></th>
                         <th>Email</th>
                         <th>Membership Type</th>
                         <th>End Employment </th>
@@ -45,7 +45,7 @@
                 </tbody>
                 <tr>
                     <td colspan="6">
-                        <asp:DataPager ID="dtPager" runat="server" PagedControlID="lstEmployee" PageSize="2">
+                        <asp:DataPager ID="dtPager" runat="server" PagedControlID="lstEmployee" PageSize="5">
                             <Fields>
                                 <asp:NextPreviousPagerField ButtonType="Link" ShowFirstPageButton="false" ShowPreviousPageButton="true"
                                     ShowNextPageButton="false" />
