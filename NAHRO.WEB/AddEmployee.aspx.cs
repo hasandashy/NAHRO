@@ -35,7 +35,7 @@ namespace NAHRO.WEB
         }
 
         [WebMethod(EnableSession =true)]
-        public static void AddEmployee(string email, string prefix, string fname, string mname, string lname,string nickName, string suffix, int agencyId, string phone, string fax, string jobTitle,DateTime membershipStartDate)
+        public static void AddEmployee(string email, string prefix, string fname, string mname, string lname,string nickName, string suffix, int agencyId, string phone, string fax, string jobTitle,DateTime membershipStartDate, string emailLocation)
         {
             Employee employee = new Employee()
             {
@@ -59,9 +59,10 @@ namespace NAHRO.WEB
         }
 
         [WebMethod]
-        public static bool CheckName(string firstName, string lastName)
+        public static bool CheckName(string firstname, string lastname)
         {
-            return true;
+            EmployeeServices employee = new EmployeeServices();
+            return employee.CheckEmployeeByName(firstname,lastname);
         }
 
 

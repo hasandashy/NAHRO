@@ -65,7 +65,7 @@ namespace NAHRO.DomainServices
 
         public bool CheckEmployeeByName(string fName, string lName)
         {
-            return false;
+            return true;
         }
 
         public void DeleteEmployee(int id)

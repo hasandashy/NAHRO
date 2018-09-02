@@ -27,14 +27,42 @@
         <form id="myform">
             <div class="form-group row">
                 <label for="email" class="col-lg-4 col-form-label">Email:</label>
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <input type="email" class="form-control" name="email" id="email">
                 </div>
-                <div class="col-lg-1">
-                    <button id="btnCheck" class="btn btn-primary" name="submit" type="submit">Check</button>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4">
                 </div>
+                <div class="col-lg-8">
+                    <b>OR</b>
+                </div>
+
             </div>
         </form>
+        <form id="myformName">
+            <div class="form-group row">
+                <label for="FirstName" class="col-lg-4 col-form-label">First Name:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" name="FirstName" id="FirstName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="LastName" class="col-lg-4 col-form-label">Last Name:</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" name="LastName" id="LastName">
+                </div>
+            </div>
+
+        </form>
+        <div class="form-group row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-8">
+                <button id="btnCheck" class="btn btn-primary" name="submit" type="submit">Check</button>
+            </div>
+        </div>
         <div class="form-group row">
             <div class="col-lg-12">
                 <span id="message"></span>
@@ -54,7 +82,25 @@
             <div class="form-group row">
                 <label for="name" class="col-lg-4 col-form-label">Email:</label>
                 <div class="col-lg-8">
-                    <label id="lblEmail"></label>
+                    <input type="email" class="form-control" name="emailaddress" id="emailaddress">
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+                    <input type="checkbox" name="chksendemail" id="chksendemail">&nbsp;send login details to this email address.
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label for="name" class="col-lg-4 col-form-label">Email Location:</label>
+                <div class="col-lg-8">
+                    <select class="form-control" id="emailLocation">
+                        <option value="Work">Work</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Home">Home</option>
+                    </select>
                 </div>
 
             </div>
@@ -152,12 +198,28 @@
         $('#frm2').hide();
         $("#startDate").datepicker();
 
+        $("#cname").val('<%= companyName%>');
+        $('#cname').attr('readonly', true);
+
         //    $("#startDate").datepicker({
         //  showOn: "button",
         //  buttonImage: "images/calendar.gif",
         //  buttonImageOnly: true,
         //  buttonText: "Select date"
         //});
+
+        $('#myformName').validate({
+            errorClass: 'error',
+            rules: {
+                FirstName: {
+                    required: true
+                },
+                LastName: {
+                    required: true
+                }
+            }
+        });
+
         $('#myform').validate({
             errorClass: 'error',
             rules: {
@@ -167,9 +229,14 @@
             }
         });
 
+
+
         $('#employeeForm').validate({
             errorClass: 'error',
             rules: {
+                emailaddress: {
+                    required: true
+                },
                 fname: {
                     required: true
                 },
@@ -199,11 +266,48 @@
         $('#btnAdditionalDetails').hide();
         $('#frm2').show();
         $('#frm1').hide();
-        $('#lblEmail').text($("#email").val());
+        if ($("#email").val() != '') {
+            $('#emailaddress').val($("#email").val());
+            $('#emailaddress').attr('readonly', true);
+
+        }
+        else if ($("#FirstName").val() != '') {
+            $('#fname').val($("#FirstName").val());
+            $('#lname').val($("#LastName").val());
+            $('#fname').attr('readonly', true);
+            $('#lname').attr('readonly', true);
+        }
         e.preventDefault();
     });
     $("#btnCheck").click(function (e) {
-        if ($('#myform').valid()) {
+        if ($('#FirstName').val() != '' || $('#LastName').val() != '') {
+            if ($('#myformName').valid()) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "AddEmployee.aspx/CheckName",
+                    data: JSON.stringify({
+                        firstname: $("#FirstName").val(),
+                        lastname: $("#LastName").val()
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.d == false) {
+                            $('#message').text('this user already exists in our system.');
+                            $('#btnAdditionalDetails').hide();
+                        } else {
+                            $('#message').text('We did not find a match to this user in the system. Would you like to add details about this person?')
+                            $('#btnAdditionalDetails').show();
+                        }
+                    },
+                    error: function (result) {
+                        $('message').text('this email address already exists in our system.');
+                    }
+                });
+            }
+        }
+        else if ($('#myform').valid()) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
@@ -237,7 +341,7 @@
                 type: "POST",
                 url: "AddEmployee.aspx/AddEmployee",
                 data: JSON.stringify({
-                    email: $("#email").val(),
+                    email: $("#emailaddress").val(),
                     prefix: $("#prefix").val(),
                     fname: $("#fname").val(),
                     mname: $("#mname").val(),
@@ -248,11 +352,15 @@
                     phone: $("#phone").val(),
                     fax: $("#fax").val(),
                     jobTitle: $("#jtitle").val(),
-                    membershipStartDate: $("#startDate").val()
+                    membershipStartDate: $("#startDate").val(),
+                    emailLocation: $('#emailLocation').val()
                 }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (result) {
+                    if ($('#chksendemail').is(":checked")) {
+                        // make a call to mail sending method here
+                    }
                     window.location.href = "Employees.aspx";
                     //$.alert("Employee successfully added.");
                 },
